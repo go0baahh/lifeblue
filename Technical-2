@@ -1,0 +1,27 @@
+<?php
+
+class Template {
+
+	// Assuming this is an array of objects with all set and ready somehow.
+	// Also assuming $anchorText and $myUrl are accessible via $this->breadcrumbs->anchorText or ->myUrl
+	private $breadcrumbs;
+
+	public function getBreadcrumbNavigation(): string {
+		$endPoint = count($this->breadcrumbs);
+
+		foreach ($this->breadcrumbs as $k => $v) {
+			// This is the last iteration.
+			if (0 === --$endPoint)
+				$v = "<i>".$v->anchorText."</i>";
+			// Not the last iteration.
+			else
+				$v = "<b><a href='.$v->myUrl.' ".$v->anchorText."</a></b>";
+		}
+		return $this->breadcrumbs;
+	}
+}
+
+
+class Webpage {
+	public $anchorText, $myUrl;
+}
